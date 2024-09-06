@@ -1,0 +1,146 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestFiles\Tasks\**" />
+    <EmbeddedResource Remove="TestFiles\Tasks\**" />
+    <None Remove="TestFiles\Tasks\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TestFiles\AddOns\_501CS100 - AddOns - DEL.l5x" />
+    <None Remove="TestFiles\AddOns\_501CS100 - AddOns - MAN.l5x" />
+    <None Remove="TestFiles\AddOns\_501CS100 - AddOns - MANNoRootNode.l5x" />
+    <None Remove="TestFiles\AddOns\_501CS100 - AddOns - O2M-AllDiffNodes.l5x" />
+    <None Remove="TestFiles\AddOns\_501CS100 - AddOns - O2O.l5x" />
+    <None Remove="TestFiles\AddOns\_501CS100 - AddOns - O2OD.l5x" />
+    <None Remove="TestFiles\Programs\_501CS100 - Programs - O2M.l5x" />
+    <None Remove="TestFiles\Programs\_501CS100 - Programs - O2O.l5x" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - DEL.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2M-DiffNode.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2M-SameNode.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2O - AliasFor.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2O - FacePlateMemberMove.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2O - FacePlateMemberMoveMapBy.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2O - FacePlateMemberMoveRule_14.L5X" />
+    <None Remove="TestFiles\Tags\_501CS100 - TAGS - O2O.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-DEL.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-MAN.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-MANNoRootNode.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2M-ALL_DIFF_NODES.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2M-ONE_SAME_NODE.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2M-SamePlusALL_DIFF_NODES_combined.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2O-Diff.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2O-DiffPlusSame.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2O.L5X" />
+    <None Remove="TestFiles\_501CS100 - DATATYPE-O2OD.L5X" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestFiles\AddOns\_501CS100 - AddOns - DEL.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\AddOns\_501CS100 - AddOns - MAN.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\AddOns\_501CS100 - AddOns - MANNoRootNode.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\AddOns\_501CS100 - AddOns - O2M-AllDiffNodes.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\AddOns\_501CS100 - AddOns - O2O.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\AddOns\_501CS100 - AddOns - O2OD.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-DEL.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-MAN.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-MANNoRootNode.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2M-ALL_DIFF_NODES.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2M-ONE_SAME_NODE.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2M-SamePlusALL_DIFF_NODES_combined.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2O-Diff.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2O-DiffPlusSame.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2O.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\DataTypes\_501CS100 - DATATYPE-O2OD.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Programs\_501CS100 - Programs - O2M.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Programs\_501CS100 - Programs - O2O.l5x">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - DEL.L5X">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2M-DiffNode.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2M-SameNode.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2O - AliasFor.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2O - FacePlateMemberMoveRule_14.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2O - FacePlateMemberMove.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2O - FacePlateMemberMoveMapBy.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Tags\_501CS100 - TAGS - O2O.L5X">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fls.AcesysConversion.Helpers\Fls.AcesysConversion.Helpers.csproj" />
+    <ProjectReference Include="..\Fls.AcesysConversion.PLC\Fls.AcesysConversion.PLC.csproj" />
+  </ItemGroup>
+
+</Project>

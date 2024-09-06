@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+	  
+  </PropertyGroup>
+	
+	<PropertyGroup>
+		<Company>FLSmidth</Company>
+		<Copyright>2023</Copyright>
+		<Description>Acesys PLC Version Conversion Tool</Description>
+		<Product>Acesys</Product>
+		<AssemblyTitle>Acesys Conversion Tool</AssemblyTitle>
+		<Version>1.0.0-dev05</Version>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<ApplicationIcon>Images\AcesysConversion.ico</ApplicationIcon>
+		<ImplicitUsings>disable</ImplicitUsings>
+	</PropertyGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Fls.AcesysConversion.Common\Fls.AcesysConversion.Common.csproj" />
+    <ProjectReference Include="..\Fls.AcesysConversion.Helpers\Fls.AcesysConversion.Helpers.csproj" />
+    <ProjectReference Include="..\Fls.AcesysConversion.PLC\Fls.AcesysConversion.PLC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\git.fls.dev\AcesysCodeMigration\Fls.AcesysConversion.UI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\close.png" />
+    <None Remove="Images\config.png" />
+    <None Remove="Images\open.png" />
+    <None Remove="Images\open16.png" />
+    <None Remove="Images\power-button.ico" />
+    <None Remove="Images\save.png" />
+    <None Remove="Images\save16.png" />
+    <None Remove="Images\Upgrade.png" />
+    <None Remove="Images\upgradetrans.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AcesysConversion.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\config.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\open.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\open16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\power-button.ico" />
+    <Resource Include="Images\save.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\save16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Upgrade.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\upgradetrans.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\git.fls.dev\AcesysCodeMigration\Fls.AcesysConversion.UI\.editorconfig" />
+  </ItemGroup>
+
+</Project>

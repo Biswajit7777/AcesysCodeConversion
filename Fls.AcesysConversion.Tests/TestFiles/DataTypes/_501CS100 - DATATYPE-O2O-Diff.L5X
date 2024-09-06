@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="30.00" TargetName="_501CS100" TargetType="Controller" ContainsContext="false" Owner="FLSmidth, FLSmidth" ExportDate="Fri Jul 23 13:52:31 2021" ExportOptions="NoRawData L5KData DecoratedData ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Target" Name="_501CS100" ProcessorType="1756-L75" MajorRev="30" MinorRev="11" TimeSlice="50" ShareUnusedTimeSlice="1" ProjectCreationDate="Mon Apr 06 15:09:10 2009" LastModifiedDate="Fri Jul 23 13:52:11 2021" SFCExecutionControl="CurrentActive" SFCRestartPosition="MostRecent"
+ SFCLastScan="DontScan" CommPath="AB_ETHIP-3\10.29.254.111\Backplane\0" ProjectSN="16#005b_1d8c" MatchProjectToController="false" CanUseRPIFromProducer="false" InhibitAutomaticFirmwareUpdate="0" PassThroughConfiguration="EnabledWithAppend" DownloadProjectDocumentationAndExtendedProperties="true" DownloadProjectCustomProperties="true" ReportMinorOverflow="false">
+<Description>
+<![CDATA[Cement Mill 1]]>
+</Description>
+<RedundancyInfo Enabled="false" KeepTestEditsOnSwitchOver="false" IOMemoryPadPercentage="90" DataTablePadPercentage="50"/>
+<Security Code="0" ChangesToDetect="16#ffff_ffff_ffff_ffff"/>
+<SafetyInfo/>
+<DataTypes>
+
+<DataType Name="ACESYS_ECS_PID" Family="NoFamily" Class="User">
+<Description>
+<![CDATA[PID Set Points]]>
+</Description>
+<Members>
+<Member Name="SPM" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Manual Setpoint (0-1 = 0-100%)]]>
+</Description>
+</Member>
+<Member Name="SPA" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Auto Setpoint (0-1 = 0-100%)]]>
+</Description>
+</Member>
+<Member Name="STATUS" DataType="ACESYS_ECS_STATUS" Dimension="0" Radix="NullType" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Mode & Timestamp to HMI]]>
+</Description>
+</Member>
+</Members>
+</DataType>
+
+</DataTypes>
+</Controller>
+</RSLogix5000Content>
+

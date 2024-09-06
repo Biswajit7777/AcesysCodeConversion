@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fls.AcesysConversion.Common\Fls.AcesysConversion.Common.csproj" />
+    <ProjectReference Include="..\Fls.AcesysConversion.Helpers\Fls.AcesysConversion.Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\git.fls.dev\AcesysCodeMigration\Fls.AcesysConversion.PLC\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\git.fls.dev\AcesysCodeMigration\Fls.AcesysConversion.PLC\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Siemens\Components\FunctionBlocks_FB\" />
+    <Folder Include="Siemens\Components\SystemFunctions_FC\" />
+    <Folder Include="Siemens\Components\OrganizationBlocks_OB\" />
+    <Folder Include="Siemens\Components\ProjectFunctions_FC\" />
+    <Folder Include="Siemens\Components\ProjectDataBlocks_DB\" />
+    <Folder Include="Siemens\Components\SystemFunctions_SFC\" />
+    <Folder Include="Siemens\Components\SystemFunctionBlocks\" />
+    <Folder Include="Siemens\Components\StandardDataBlocks_DB\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,101 @@
+﻿<UserControl
+    x:Class="Fls.AcesysConversion.UI.MessageBoardUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ie="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:Fls.AcesysConversion.UI.ViewModels"
+    x:Name="rootElement"
+    d:DataContext="{d:DesignInstance Type=viewmodels:MessageBoardViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <DockPanel>
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button Command="{Binding LocateMessageCommand}" Content="Locate On Converted" />
+                    <Button
+                        Command="{Binding SaveMessagesCommand}"
+                        Content="Save"
+                        ToolTip="Future Implementation (does not work)" />
+                </ToolBar>
+            </ToolBarTray>
+            <ListView
+                x:Name="MyListViewConverted"
+                Margin="2,2,2,4"
+                d:ItemsSource="{d:SampleData ItemCount=5}"
+                Background="Snow"
+                DockPanel.Dock="Bottom"
+                ItemsSource="{Binding Messages}"
+                MouseDoubleClick="MyListViewConverted_MouseDoubleClick"
+                SelectedItem="{Binding SelectedUserMessage}"
+                VirtualizingStackPanel.IsVirtualizing="True"
+                VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="SelectionChanged">
+                        <ie:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+
+                <ListView.View>
+                    <GridView>
+                        <!--<GridViewColumn Width="150" DisplayMemberBinding="{Binding Id}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="Id">Id</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding OriginalId}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="OriginalId">Original Id</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>-->
+
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding NodeType}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="NodeType">Node</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding UserMessageType}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="UserMessageType">Message Type</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding ReplacementType}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="ReplacementType">Replacement Type</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Operation}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="Operation">Operation</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <!--<GridViewColumn Width="200" DisplayMemberBinding="{Binding Id}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="Operation">Id</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>-->
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="Name">Name</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <!--<GridViewColumn Width="500" DisplayMemberBinding="{Binding XmlString}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="Message">XmlString</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>-->
+                        <GridViewColumn Width="400" DisplayMemberBinding="{Binding Message}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Click="MyListViewConvertedColumnHeader_Click" Tag="Message">Message</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+
+    </Grid>
+</UserControl>

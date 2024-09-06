@@ -1,0 +1,618 @@
+﻿<Window
+    x:Class="Fls.AcesysConversion.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:custom="clr-namespace:Fls.AcesysConversion.UI.CustomControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enum="clr-namespace:Fls.AcesysConversion.Common.Enums;assembly=Fls.AcesysConversion.Common"
+    xmlns:local="clr-namespace:Fls.AcesysConversion.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:viewmodels="clr-namespace:Fls.AcesysConversion.UI.ViewModels"
+    Title="Acesys Conversion Tool"
+    Width="1200"
+    Height="800"
+    d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+    Background="LightGray"
+    Closing="Window_Closing"
+    Topmost="False"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ObjectDataProvider
+            x:Key="BlockSelectionEnum"
+            MethodName="GetValues"
+            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enum:BlockSelection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="InterlockSelectionEnum"
+            MethodName="GetValues"
+            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enum:InterlockSelection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="FpAttributeMappingEnum"
+            MethodName="GetValues"
+            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enum:FacePlateAttributeMapping" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Style x:Key="GridSplitterStylePurple" TargetType="{x:Type GridSplitter}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridSplitter}">
+                        <Border BorderThickness="10">
+                            <Border.BorderBrush>
+                                <DrawingBrush
+                                    TileMode="Tile"
+                                    Viewport="0,0,4,4"
+                                    ViewportUnits="Absolute">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="MediumPurple">
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <RectangleGeometry Rect="0,0,25,25" />
+                                                        <RectangleGeometry Rect="10,10,10,10" />
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Border.BorderBrush>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="316*" />
+            <ColumnDefinition Width="129*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="32" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="4">
+
+            <Ribbon
+                x:Name="RibbonWPF"
+                Height="150"
+                Margin="4,-22,4,-10"
+                DockPanel.Dock="Top">
+                <Ribbon.ApplicationMenu>
+                    <RibbonApplicationMenu CanAddToQuickAccessToolBarDirectly="False">
+                        <RibbonApplicationMenuItem
+                            x:Name="AppCmdOpen"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding OpenFileCommand}"
+                            Header="Open L5X"
+                            ImageSource="Images/open16.png"
+                            IsCheckable="False"
+                            QuickAccessToolBarImageSource="Images/open16.png" />
+
+                        <RibbonApplicationMenuItem
+                            x:Name="AppCmdUpgrade"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding UpgradeFileCommand}"
+                            Header="Upgrade L5X V7 To V8"
+                            ImageSource="Images/AcesysConversion.ico"
+                            IsCheckable="False"
+                            QuickAccessToolBarImageSource="Images/AcesysConversion.ico" />
+
+                        <RibbonApplicationMenuItem
+                            x:Name="AppCmdSave"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding SaveFileCommand}"
+                            Header="Save L5X"
+                            ImageSource="Images/save16.png"
+                            IsCheckable="False"
+                            QuickAccessToolBarImageSource="Images/save16.png" />
+
+                        <RibbonApplicationMenuItem
+                            x:Name="AppCmdClose"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding CloseFileCommand}"
+                            Header="Close L5X"
+                            ImageSource="Images/close.png"
+                            IsCheckable="False"
+                            QuickAccessToolBarImageSource="Images/close.png" />
+
+                        <RibbonApplicationMenuItem
+                            x:Name="WindowClose"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Click="WindowClose_Click"
+                            Header="Close Application"
+                            ImageSource="Images/power-button.ico"
+                            IsCheckable="False"
+                            QuickAccessToolBarImageSource="Images/power-button.ico" />
+                    </RibbonApplicationMenu>
+                </Ribbon.ApplicationMenu>
+
+                <RibbonTab
+                    x:Name="FileTab"
+                    Header="Menu"
+                    KeyTip="" Margin="0,0,0,-33">
+                    <RibbonGroup
+                        Height="115"
+                        MinWidth="188"
+                        VerticalAlignment="Top"
+                        CanAddToQuickAccessToolBarDirectly="False"
+                        Header="File" Margin="1,0,1,0" Width="240">
+                        <RibbonButton
+                            x:Name="Open"
+                            Width="103"
+                            Height="26"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding OpenFileCommand}"
+                            Content="RibbonButton"
+                            Label=" Open L5X File"
+                            SmallImageSource="Images/open16.png" Margin="0,9,0,0" />
+
+                        <RibbonButton
+                            x:Name="Upgrade"
+                            Width="150"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding UpgradeFileCommand}"
+                            Content="RibbonButton"
+                            Label=" Upgrade L5X V7 To V8"
+                            SmallImageSource="Images/upgrade.png" Margin="-6,16,0,0" />
+
+                        <RibbonButton
+                            x:Name="Save"
+                            Width="80"
+                            Height="22"
+                            Margin="8,53,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding SaveFileCommand}"
+                            Content="RibbonButton"
+                            Label=" Save L5X"
+                            SmallImageSource="Images/save16.png"
+                            ToolTipTitle="" />
+
+                        <RibbonButton
+                            x:Name="CloseFile"
+                            Width="80"
+                            Height="21"
+                            Margin="8,-61,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding CloseFileCommand}"
+                            Content="RibbonButton"
+                            Label=" Close"
+                            SmallImageSource="Images/close.png" />
+
+                    </RibbonGroup>
+                    <RibbonGroup
+    Height="115"
+    MinWidth="188"
+    VerticalAlignment="Top"
+    CanAddToQuickAccessToolBarDirectly="False"
+    Header="File" Width="229" Margin="1,0,1,0">
+
+                        <RibbonButton
+        x:Name="Open1"
+        Width="112"
+        Height="35"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        CanAddToQuickAccessToolBarDirectly="False"
+        Command="{Binding OpenECSFileCommand}"
+        Content="RibbonButton"
+        Label=" Open ECS XML"
+        SmallImageSource="/Images/open16.png" Margin="1,0,0,0" />
+
+                        <RibbonButton
+        x:Name="Save1"
+        Width="85"
+        Height="22"
+        Margin="144,-30,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        CanAddToQuickAccessToolBarDirectly="False"
+        Command="{Binding SaveECSFileCommand}"
+        Content="RibbonButton"
+        Label=" Save"
+        SmallImageSource="/Images/save16.png"
+        ToolTipTitle="" />
+                        <ListBox
+        x:Name="ECSFileListBox"
+        Width="199"
+        Height="65"
+        Margin="-217,36,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        ItemsSource="{Binding Items}"
+        Background="White"
+        ScrollViewer.VerticalScrollBarVisibility="Auto"
+        />
+                        <RibbonGroup Height="115"
+                            MinWidth="188"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Header="Options" Margin="474,1,-551,0">
+                            <Grid MinHeight="50" VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="Selector" Margin="0,15,0,11" Grid.RowSpan="2" />
+                                <ComboBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="80"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    ItemsSource="{Binding Source={StaticResource BlockSelectionEnum}}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding BlockSelect}" Margin="0,18,0,14" Grid.RowSpan="2" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="Interlock" Grid.ColumnSpan="2" Margin="0,28,80,-28" />
+
+                                <ComboBox
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Width="80"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    ItemsSource="{Binding Source={StaticResource InterlockSelectionEnum}}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding InterlockSelect}" Margin="0,31,0,-25" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Content="FP Map By" Grid.ColumnSpan="2" Margin="0,15,80,11" Grid.RowSpan="2" />
+                                <ComboBox
+                                    Grid.Column="3"
+                                    Width="80"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    ItemsSource="{Binding Source={StaticResource FpAttributeMappingEnum}}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding MapBy}" Margin="0,19,0,13" Grid.RowSpan="2" />
+                            </Grid>
+                        </RibbonGroup>
+
+
+
+                    </RibbonGroup>
+                    <RibbonGroup Height="115"
+                        MinWidth="188"
+                        VerticalAlignment="Top"
+                        CanAddToQuickAccessToolBarDirectly="False"
+                        Header="Options">
+                        <Grid MinHeight="50" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Content="Selector" Margin="0,15,0,11" Grid.RowSpan="2" />
+                            <ComboBox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Width="80"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                FontSize="10"
+                                ItemsSource="{Binding Source={StaticResource BlockSelectionEnum}}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding BlockSelect}" Margin="0,18,0,14" Grid.RowSpan="2" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Content="Interlock" Grid.ColumnSpan="2" Margin="0,28,80,-28" />
+
+                            <ComboBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Width="80"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                FontSize="10"
+                                ItemsSource="{Binding Source={StaticResource InterlockSelectionEnum}}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding InterlockSelect}" Margin="0,31,0,-25" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Content="FP Map By" Grid.ColumnSpan="2" Margin="0,15,80,11" Grid.RowSpan="2" />
+                            <ComboBox
+                                Grid.Column="3"
+                                Width="80"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                FontSize="10"
+                                ItemsSource="{Binding Source={StaticResource FpAttributeMappingEnum}}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding MapBy}" Margin="0,19,0,13" Grid.RowSpan="2" />
+                        </Grid>
+                    </RibbonGroup>
+                    <RibbonGroup
+                        Height="115"
+                        MinWidth="188"
+                        VerticalAlignment="Top"
+                        CanAddToQuickAccessToolBarDirectly="False"
+                        Header="File" Width="240">
+                        <RibbonButton
+                            x:Name="Open2"
+                            Width="104"
+                            HorizontalAlignment="Center"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding OpenS7FileCommand}"
+                            Content="RibbonButton"
+                            Label=" Open S7 Files"
+                            SmallImageSource="/Images/open16.png" Margin="0,3,0,0" />
+
+                        <RibbonButton
+                            x:Name="Upgrade1"
+                            Width="150"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding UpgradeS7FileCommand}"
+                            Content="RibbonButton"
+                            Label=" Upgrade S7 V7 To V8"
+                            SmallImageSource="/Images/Upgrade.png" Margin="-6,0,0,0" />
+
+                        <RibbonButton
+                            x:Name="Save2"
+                            Width="80"
+                            Height="22"
+                            Margin="8,31,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding SaveS7FileCommand}"
+                            Content="RibbonButton"
+                            Label=" Save"
+                            SmallImageSource="/Images/save16.png"
+                            ToolTipTitle="" />
+
+                        <RibbonButton
+                            x:Name="CloseFile1"
+                            Width="80"
+                            Height="21"
+                            Margin="8,-47,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            CanAddToQuickAccessToolBarDirectly="False"
+                            Command="{Binding CloseS7FileCommand}"
+                            Content="RibbonButton"
+                            Label=" Close"
+                            SmallImageSource="/Images/close.png" />
+                        <ListBox
+                            x:Name="S7FileListBox"
+                            Width="218"
+                            Height="43"
+                            Margin="-230,53,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            ItemsSource="{Binding S7Items}"
+                            Background="White"
+ScrollViewer.VerticalScrollBarVisibility="Auto"
+        />
+
+                    </RibbonGroup>
+
+                </RibbonTab>
+            </Ribbon>
+
+        </DockPanel>
+
+        <DockPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,20,0,0">
+
+            <custom:CodeEditor
+    x:Name="textEditor"
+    CurrentLine="{Binding SourceCurrentLine}"
+    FontFamily="Consolas"
+    FontSize="10pt"
+    ShowLineNumbers="True"
+    SyntaxHighlighting="XML"
+    Text="{Binding SourceWithoutIdXmlText}" />
+
+        </DockPanel>
+
+        <GridSplitter
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="4"
+            Margin="0,100,1,95"
+            HorizontalAlignment="Stretch"
+            Style="{Binding Source={StaticResource GridSplitterStylePurple}}" />
+
+        <TabControl
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="1,20,2,2"
+            Padding="0" Grid.ColumnSpan="2"
+            SelectedIndex="{Binding SelectedTabIndex}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse
+                            Width="10"
+                            Height="10"
+                            Fill="DarkGray" />
+                        <TextBlock>Rockwell</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <custom:CodeEditor
+    x:Name="textEditorTarget2"
+    Background="LightCyan"
+    CurrentLine="{Binding TargetCurrentLine}"
+    FontFamily="Consolas"
+    FontSize="10pt"
+    ShowLineNumbers="True"
+    SyntaxHighlighting="XML"
+    Text="{Binding TargetWithoutIdXmlText}" />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse
+                        Width="10"
+                        Height="10"
+                        Fill="DarkGray" />
+                        <TextBlock>Siemens</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <custom:CodeEditor
+x:Name="textEditorTarget3"
+Background="LightCyan"
+CurrentLine="{Binding TargetCurrentLine}"
+FontFamily="Consolas"
+FontSize="10pt"
+ShowLineNumbers="True"
+SyntaxHighlighting="XML"
+Text="{Binding TargetWithoutIdAWLText}" />
+            </TabItem>
+            <TabItem Header="Schneider">
+                <TextBlock Text="Schneider PLC Related Information" />
+            </TabItem>
+        </TabControl>
+
+        <GridSplitter
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Height="4"
+            Margin="100,1,100,0"
+            HorizontalAlignment="Stretch"
+            Style="{Binding Source={StaticResource GridSplitterStylePurple}}" />
+
+        <local:MessageBoardUserControl
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="4" Margin="0,5,0,0" Grid.RowSpan="2" />
+
+        <StatusBar
+            Grid.Row="4"
+            Grid.ColumnSpan="4"
+            Height="30"
+            VerticalAlignment="Center"
+            Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"
+            IsTabStop="False">
+
+            <Border
+                Height="24"
+                BorderBrush="Black"
+                BorderThickness=".5">
+                <StackPanel Orientation="Horizontal">
+                    <StatusBarItem>
+                        <TextBlock
+                            x:Name="BusyIndicator"
+                            Width="80"
+                            Padding="2"
+                            VerticalAlignment="Center"
+                            Background="{Binding LoadingIndicatorBackground}"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="{Binding LoadingIndicatorText}"
+                            TextAlignment="Center" />
+                    </StatusBarItem>
+                </StackPanel>
+            </Border>
+
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBox
+                    x:Name="txtFileName"
+                    Height="24"
+                    Padding="2"
+                    IsReadOnly="True"
+                    Text="{Binding FileName}" />
+            </StatusBarItem>
+            <Border
+                Height="24"
+                BorderBrush="Black"
+                BorderThickness=".5">
+                <StackPanel Orientation="Horizontal">
+                    <StatusBarItem HorizontalAlignment="Right">
+                        <TextBlock
+                            x:Name="timeElapsedLabel"
+                            Height="18"
+                            Text="Seconds Elapsed:" />
+                    </StatusBarItem>
+                    <StatusBarItem HorizontalAlignment="Right">
+                        <TextBlock
+                            x:Name="timeElapsed"
+                            FontWeight="Bold"
+                            Text="{Binding TimeElapsed}" />
+                    </StatusBarItem>
+                </StackPanel>
+            </Border>
+
+            <Border
+                Height="24"
+                BorderBrush="Black"
+                BorderThickness=".5">
+                <StackPanel Orientation="Horizontal">
+                    <StatusBarItem HorizontalAlignment="Right">
+                        <TextBlock x:Name="progressBar" Text="{Binding ProgressText}" />
+                    </StatusBarItem>
+                </StackPanel>
+            </Border>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -1,0 +1,17 @@
+{
+  "Serilog": {
+    "Using": ["Serilog.Sinks.File" ],
+    "MinimumLevel": "Debug",
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": { "path": "Logs/log.txt" }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+
+    "Properties": {
+      "Application": "Acesys.PLC.CodeConversionTool"
+    }
+  }
+}

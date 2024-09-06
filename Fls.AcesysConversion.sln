@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fls.AcesysConversion.Helpers", "Fls.AcesysConversion.Helpers\Fls.AcesysConversion.Helpers.csproj", "{CD8EF5FF-531B-46CF-A4DC-8BCF17381505}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fls.AcesysConversion.UI", "Fls.AcesysConversion.UI\Fls.AcesysConversion.UI.csproj", "{F80CC3CB-2595-425C-AD9C-A5A63ABC46EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fls.AcesysConversion.Common", "Fls.AcesysConversion.Common\Fls.AcesysConversion.Common.csproj", "{FB785AA5-35FF-4B05-B6F5-E143147914BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fls.AcesysConversion.DataImporter", "Fls.AcesysConversion.DataImporter\Fls.AcesysConversion.DataImporter.csproj", "{F5A1E1A2-760E-4B77-94FD-2E866E4B9F96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fls.AcesysConversion.Tests", "Fls.AcesysConversion.Tests\Fls.AcesysConversion.Tests.csproj", "{15DE63ED-0001-4D3F-B648-52D16959ED94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fls.AcesysConversion.PLC", "Fls.AcesysConversion.PLC\Fls.AcesysConversion.PLC.csproj", "{7CFBBA79-15E8-4FCA-988B-DCE95ED6C22B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD8EF5FF-531B-46CF-A4DC-8BCF17381505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8EF5FF-531B-46CF-A4DC-8BCF17381505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8EF5FF-531B-46CF-A4DC-8BCF17381505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8EF5FF-531B-46CF-A4DC-8BCF17381505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F80CC3CB-2595-425C-AD9C-A5A63ABC46EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F80CC3CB-2595-425C-AD9C-A5A63ABC46EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F80CC3CB-2595-425C-AD9C-A5A63ABC46EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F80CC3CB-2595-425C-AD9C-A5A63ABC46EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB785AA5-35FF-4B05-B6F5-E143147914BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB785AA5-35FF-4B05-B6F5-E143147914BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB785AA5-35FF-4B05-B6F5-E143147914BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB785AA5-35FF-4B05-B6F5-E143147914BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5A1E1A2-760E-4B77-94FD-2E866E4B9F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5A1E1A2-760E-4B77-94FD-2E866E4B9F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5A1E1A2-760E-4B77-94FD-2E866E4B9F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5A1E1A2-760E-4B77-94FD-2E866E4B9F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DE63ED-0001-4D3F-B648-52D16959ED94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DE63ED-0001-4D3F-B648-52D16959ED94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DE63ED-0001-4D3F-B648-52D16959ED94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DE63ED-0001-4D3F-B648-52D16959ED94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CFBBA79-15E8-4FCA-988B-DCE95ED6C22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CFBBA79-15E8-4FCA-988B-DCE95ED6C22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CFBBA79-15E8-4FCA-988B-DCE95ED6C22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFBBA79-15E8-4FCA-988B-DCE95ED6C22B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C706CBE8-6892-4983-BFCB-E506653C1F43}
+	EndGlobalSection
+EndGlobal

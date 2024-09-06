@@ -1,0 +1,31 @@
+Completed:
+	Upload to GIT [X]
+	Export db to sql statements (backup) [X]
+	Import datatypes to database[X]
+	Implement one to many relationship [X]
+	Click upgrade second time - issue with loading [X]
+	Save[X]
+	Exception handling - global[X]
+	Implement delete datatype - new requirement[X]
+	Show busy indicator[X]
+	Make messageboard reference as an interface [X]
+	Implement Extended Select - new requirement [X]
+	- mvvm pattern (code refactor : dependency injection)[X]
+	- unit testing [x]
+	
+Pending:
+	UI finalize[ ]
+	Encryption for mapping.db[ ]
+	Validate xml by object itself[ ]
+	PLC CPU is redundant, this information is extracted from the hardware (to be explained later)
+	
+Technical Debt:
+	
+
+Tags Work - structure vs structuremember
+acesys interlock decorated data is empty, whether it should be removed
+
+Test for map by function
+
+		
+

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="30.00" TargetName="_501CS100" TargetType="Controller" ContainsContext="false" Owner="FLSmidth, FLSmidth" ExportDate="Fri Jul 23 13:52:31 2021" ExportOptions="NoRawData L5KData DecoratedData ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Target" Name="_501CS100" ProcessorType="1756-L75" MajorRev="30" MinorRev="11" TimeSlice="50" ShareUnusedTimeSlice="1" ProjectCreationDate="Mon Apr 06 15:09:10 2009" LastModifiedDate="Fri Jul 23 13:52:11 2021" SFCExecutionControl="CurrentActive" SFCRestartPosition="MostRecent"
+ SFCLastScan="DontScan" CommPath="AB_ETHIP-3\10.29.254.111\Backplane\0" ProjectSN="16#005b_1d8c" MatchProjectToController="false" CanUseRPIFromProducer="false" InhibitAutomaticFirmwareUpdate="0" PassThroughConfiguration="EnabledWithAppend" DownloadProjectDocumentationAndExtendedProperties="true" DownloadProjectCustomProperties="true" ReportMinorOverflow="false">
+<Description>
+<![CDATA[Cement Mill 1]]>
+</Description>
+<RedundancyInfo Enabled="false" KeepTestEditsOnSwitchOver="false" IOMemoryPadPercentage="90" DataTablePadPercentage="50"/>
+<Security Code="0" ChangesToDetect="16#ffff_ffff_ffff_ffff"/>
+<SafetyInfo/>
+<DataTypes>
+
+<DataType Name="ACESYS_FACEPLATE_SELECT" Family="NoFamily" Class="User">
+<Description>
+<![CDATA[ACESYS Group / Route Commands v7]]>
+</Description>
+<Members>
+<Member Name="ZZZZZZZZZZACESYS_CMD0" DataType="SINT" Dimension="0" Radix="Decimal" Hidden="true" ExternalAccess="Read/Write"/>
+<Member Name="GSEL" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="0" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Select]]>
+</Description>
+</Member>
+<Member Name="GSTR" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="1" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Start]]>
+</Description>
+</Member>
+<Member Name="GSTP" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="2" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Stop]]>
+</Description>
+</Member>
+<Member Name="GQSTP" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="3" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Quick Stop]]>
+</Description>
+</Member>
+<Member Name="GSS" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="4" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Single Start]]>
+</Description>
+</Member>
+<Member Name="GLTP" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="5" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Local Test Permission]]>
+</Description>
+</Member>
+<Member Name="GASTW" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="6" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Audible Start]]>
+</Description>
+</Member>
+<Member Name="GVSTW" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_CMD0" BitNumber="7" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Group Visual Start]]>
+</Description>
+</Member>
+</Members>
+</DataType>
+
+
+</DataTypes>
+</Controller>
+</RSLogix5000Content>

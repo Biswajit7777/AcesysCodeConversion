@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ACESYSv8_Standards.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ACESYSv8_Standards.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fls.AcesysConversion.Helpers\Fls.AcesysConversion.Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\git.fls.dev\AcesysCodeMigration\Fls.AcesysConversion.DataImporter\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\git.fls.dev\AcesysCodeMigration\Fls.AcesysConversion.DataImporter\.editorconfig" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="30.00" TargetName="_501CS100" TargetType="Controller" ContainsContext="false" Owner="FLSmidth, FLSmidth" ExportDate="Fri Jul 23 13:52:31 2021" ExportOptions="NoRawData L5KData DecoratedData ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Target" Name="_501CS100" ProcessorType="1756-L75" MajorRev="30" MinorRev="11" TimeSlice="50" ShareUnusedTimeSlice="1" ProjectCreationDate="Mon Apr 06 15:09:10 2009" LastModifiedDate="Fri Jul 23 13:52:11 2021" SFCExecutionControl="CurrentActive" SFCRestartPosition="MostRecent"
+ SFCLastScan="DontScan" CommPath="AB_ETHIP-3\10.29.254.111\Backplane\0" ProjectSN="16#005b_1d8c" MatchProjectToController="false" CanUseRPIFromProducer="false" InhibitAutomaticFirmwareUpdate="0" PassThroughConfiguration="EnabledWithAppend" DownloadProjectDocumentationAndExtendedProperties="true" DownloadProjectCustomProperties="true" ReportMinorOverflow="false">
+<Description>
+<![CDATA[Cement Mill 1]]>
+</Description>
+<RedundancyInfo Enabled="false" KeepTestEditsOnSwitchOver="false" IOMemoryPadPercentage="90" DataTablePadPercentage="50"/>
+<Security Code="0" ChangesToDetect="16#ffff_ffff_ffff_ffff"/>
+<SafetyInfo/>
+<DataTypes>
+<DataType Name="TestO2M_AllDiffName" Family="NoFamily" Class="User">
+<Description>
+<![CDATA[this is a test datatype for one to many relationship and all different replacements]]>
+</Description>
+<Members>
+<Member Name="REAL" DataType="REAL" Dimension="15" Radix="Float" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Read of Float value from Table]]>
+</Description>
+</Member>
+<Member Name="INT" DataType="INT" Dimension="25" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Read of Integer value from Table]]>
+</Description>
+</Member>
+</Members>
+</DataType>
+<DataType Name="TestO2M_AllDiffName2" Family="NoFamily" Class="User">
+<Description>
+<![CDATA[this is a test datatype for one to many relationship and all different replacements]]>
+</Description>
+<Members>
+<Member Name="REAL" DataType="REAL" Dimension="15" Radix="Float" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Read of Float value from Table]]>
+</Description>
+</Member>
+<Member Name="INT" DataType="INT" Dimension="25" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Read of Integer value from Table]]>
+</Description>
+</Member>
+</Members>
+</DataType>
+
+<DataType Name="ACESYS_PLCtoPLC" Family="NoFamily" Class="User">
+<Description>
+<![CDATA[ORIGINAL TAG V7]]>
+</Description>
+<Members>
+<Member Name="ZZZZZZZZZZACESYS_PLC0" DataType="SINT" Dimension="0" Radix="Decimal" Hidden="true" ExternalAccess="Read/Write"/>
+<Member Name="WatchDog" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZACESYS_PLC0" BitNumber="0" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Watch Dog]]>
+</Description>
+</Member>
+<Member Name="Bools" DataType="BOOL" Dimension="64" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[General Data Space]]>
+</Description>
+</Member>
+<Member Name="Integers" DataType="INT" Dimension="16" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[General Data Space]]>
+</Description>
+</Member>
+<Member Name="Reals" DataType="REAL" Dimension="16" Radix="Float" Hidden="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[General Data Space]]>
+</Description>
+</Member>
+</Members>
+</DataType>
+
+</DataTypes>
+</Controller>
+</RSLogix5000Content>

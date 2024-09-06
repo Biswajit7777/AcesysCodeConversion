@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Fls.AcesysConversion.UI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Fls.AcesysConversion.UI"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources />
+</Application>
