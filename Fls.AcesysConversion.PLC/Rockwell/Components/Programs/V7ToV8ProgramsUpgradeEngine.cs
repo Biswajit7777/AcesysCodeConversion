@@ -3587,6 +3587,11 @@ public partial class V7ToV8ProgramsUpgradeEngine : UpgradeEngine
 
                     processedText = dbHelper.ApplyTextConversionSimulationRungs(dataType, processedText);
 
+                    if (processedText == null)
+                    {
+                        continue;
+                    }
+                    
                     string patternGON = @"\bOTE\(([^)]+\.GON)\)";
                     Match matchGON = Regex.Match(processedText, patternGON);
 
