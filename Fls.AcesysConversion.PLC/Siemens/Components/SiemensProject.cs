@@ -103,7 +103,8 @@ namespace Fls.AcesysConversion.PLC.Siemens.Components
 
             if (DataBlocks != null) 
             {
-                progress.Report("Data Block Upgrade Started");                
+                progress.Report("Data Block Upgrade Started");
+                DataBlocks.UpgradeVersion(awlContent, options, progress);
             }
         }
 

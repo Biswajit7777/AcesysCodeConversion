@@ -4045,10 +4045,15 @@ public partial class DbHelper
 
                 // Look up the replacements in the DataTable
                 DataRow[] rows = dtRungConversion.Select($"From_Pin_Name = '{fpElement}'");
-                string fpElementReplacement = rows.Length > 0 ? rows[0]["To_Pin_Name"].ToString() : fpElement;
+                string fpElementReplacement = rows.Length > 0 ? rows[0]["To_Pin_Name"].ToString() : fpElement;                
 
                 rows = dtRungConversion.Select($"From_Pin_Name = '{simElement}'");
                 string simElementReplacement = rows.Length > 0 ? rows[0]["To_Pin_Name"].ToString() : simElement;
+
+                if (fpElementReplacement == string.Empty && simElementReplacement == string.Empty)
+                {
+                    return null;
+                }
 
                 // Replace the elements in the processedText
                 processedText = Regex.Replace(processedText, @"FP\." + Regex.Escape(fpElement) + @"\)", $"FP.{fpElementReplacement})");
