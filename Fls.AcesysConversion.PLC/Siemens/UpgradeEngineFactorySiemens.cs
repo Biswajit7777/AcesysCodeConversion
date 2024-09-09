@@ -8,6 +8,8 @@ using Fls.AcesysConversion.PLC.Rockwell.Components.Tags;
 using Fls.AcesysConversion.PLC.Rockwell.Components.Tasks;
 using Fls.AcesysConversion.PLC.Siemens.Components;
 using Fls.AcesysConversion.PLC.Siemens.Components.DataBlock;
+using Fls.AcesysConversion.PLC.Siemens.Components.FunctionBlocks_FB;
+using Fls.AcesysConversion.PLC.Siemens.Components.SystemFunctionBlocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,9 +66,15 @@ namespace Fls.AcesysConversion.PLC.Siemens
                             {
                                 switch (EntityType?.Name)
                                 {
-                                    case nameof(L5XDataTypes):
-                                        upgradeProcessor = new V7ToV8DataBlockUpgradeEngine(Current, Original, Project);
-                                        break;                                    
+                                    case nameof(SiemensDataTypes):
+                                        upgradeProcessor = new V7ToV8DataTypeUpgradeEngine(Current, Original, Project);
+                                        break;
+                                    case nameof(SiemensFBs):
+                                        upgradeProcessor = new V7ToV8FBUpgradeEngine(Current, Original, Project);
+                                        break;
+                                    case nameof(SiemensSFBs):
+                                        upgradeProcessor = new V7ToV8SFBUpgradeEngine(Current, Original, Project);
+                                        break;
                                 }
 
                             }

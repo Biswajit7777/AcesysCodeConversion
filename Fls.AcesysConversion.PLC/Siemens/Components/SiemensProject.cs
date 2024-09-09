@@ -3,9 +3,10 @@ using Fls.AcesysConversion.Common.Entities;
 using Fls.AcesysConversion.Common.Enums;
 using Fls.AcesysConversion.PLC.Rockwell.Components;
 using Fls.AcesysConversion.PLC.Siemens.Components.DataBlock;
+using Fls.AcesysConversion.PLC.Siemens.Components.FunctionBlocks_FB;
+using Fls.AcesysConversion.PLC.Siemens.Components.SystemFunctionBlocks;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,17 +20,38 @@ namespace Fls.AcesysConversion.PLC.Siemens.Components
         public readonly PlcManufacturer Manufacturer = PlcManufacturer.Siemens;
         private readonly List<IMessageBoardSubscriber> Subscribers = new();
         private int sequence = 0;
-        public SiemensDataBlocks DataBlocks { get; set; }
+        public SiemensDataTypes DataTypes { get; set; }
+        public SiemensFBs FunctionBlocks { get; set; }
+        public SiemensSFBs SFBs { get; set; }
+
+        // Store the loaded AWL content privately
+        private string? loadedAwlContent;
+
+        // Store the loaded SDF content privately
+        private string? loadedSdfContent;
+
+        public string? LoadedAwlContent
+        {
+            get => loadedAwlContent;
+            private set => loadedAwlContent = value; // Keep the setter private
+        }
+
+        public string? LoadedSdfContent
+        {
+            get => loadedSdfContent;
+            private set => loadedSdfContent = value; // Keep the setter private
+        }
 
         public SiemensProject()
         {
-
         }
 
+        // Load AWL file content
         public void LoadAwlFile(string awlContent)
         {
-            if (awlContent != null)
-            {             
+            if (!string.IsNullOrEmpty(awlContent))
+            {
+                LoadedAwlContent = awlContent;
                 ProcessAwlContent(awlContent);
             }
             else
@@ -38,27 +60,80 @@ namespace Fls.AcesysConversion.PLC.Siemens.Components
             }
         }
 
-        private void ProcessAwlContent(string awlContent)
-        {   
-            string[] awlLines = awlContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+        // Load SDF file content
+        public void LoadSdfFile(string sdfContent)
+        {
+            if (!string.IsNullOrEmpty(sdfContent))
+            {
+                LoadedSdfContent = sdfContent;
+                ProcessSdfContent(sdfContent);
+            }
+            else
+            {
+                throw new FileNotFoundException("The specified SDF file does not exist.");
+            }
+        }
 
+        // Method to extract the loaded AWL file content
+        public string? ExtractAwlFile()
+        {
+            if (!string.IsNullOrEmpty(LoadedAwlContent))
+            {
+                return LoadedAwlContent;
+            }
+            else
+            {
+                throw new InvalidOperationException("No AWL file is loaded.");
+            }
+        }
+
+        // Method to extract the loaded SDF file content
+        public string? ExtractSdfFile()
+        {
+            if (!string.IsNullOrEmpty(LoadedSdfContent))
+            {
+                return LoadedSdfContent;
+            }
+            else
+            {
+                throw new InvalidOperationException("No SDF file is loaded.");
+            }
+        }
+
+        private void ProcessAwlContent(string awlContent)
+        {
+            string[] awlLines = awlContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             foreach (string line in awlLines)
-            {                
+            {
                 ParseAwlLine(line);
             }
         }
 
-        private void ParseAwlLine(string line)
-        {            
-            if (line.StartsWith("A")) 
+        private void ProcessSdfContent(string sdfContent)
+        {
+            // Implement the logic to process the SDF file content
+            string[] sdfLines = sdfContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            foreach (string line in sdfLines)
             {
-                
+                ParseSdfLine(line);
+            }
+        }
+
+        private void ParseAwlLine(string line)
+        {
+            if (line.StartsWith("A"))
+            {
+                // Parse logic for AWL
             }
             else if (line.StartsWith("O"))
             {
-                
+                // Parse logic for AWL
             }
-            
+        }
+
+        private void ParseSdfLine(string line)
+        {
+            // Implement parsing logic for SDF lines
         }
 
         public int GetNewMessageboardReference()
@@ -85,33 +160,44 @@ namespace Fls.AcesysConversion.PLC.Siemens.Components
             }
         }
 
-        public void UpgradeVersion(string awlContent, SiemensUpgradeOptions options, IProgress<string> progress)
+        public void UpgradeVersion(SiemensProject project, SiemensUpgradeOptions options, IProgress<string> progress)
         {
-            // Regex pattern to match everything between DATA_BLOCK and END_DATA_BLOCK
-            string pattern = @"DATA_BLOCK[\s\S]*?END_DATA_BLOCK";
+            DataTypes = new SiemensDataTypes(null, null, null);
 
-            // Find all matches
-            var matches = Regex.Matches(awlContent, pattern);
-
-            List<string> dataBlocks = new List<string>();
-
-            foreach (Match match in matches)
+            if (DataTypes != null)
             {
-                dataBlocks.Add(match.Value);
+                progress.Report("DataTypes Upgrade Started");
+                DataTypes.UpgradeVersion(project, options, progress);
+                progress.Report("DataTypes Upgrade Completed");
             }
-            DataBlocks = CreateSiemensDataBlocks(dataBlocks);
 
-            if (DataBlocks != null) 
+            FunctionBlocks = new SiemensFBs(null, null, null);
+
+            if (FunctionBlocks != null)
             {
-                progress.Report("Data Block Upgrade Started");
-                DataBlocks.UpgradeVersion(awlContent, options, progress);
+                progress.Report("Function Blocks Upgrade Started");
+                FunctionBlocks.UpgradeVersion(project, options, progress);
+                progress.Report("Function Blocks Upgrade Completed");
             }
+
+            SFBs = new SiemensSFBs(null, null, null);
+
+            if (SFBs != null)
+            {
+                progress.Report("System Function Blocks Upgrade Started");
+                SFBs.UpgradeVersion(project, options, progress);
+                progress.Report("System Function Blocks Upgrade Completed");
+            }
+
+
+
+
         }
 
-        private SiemensDataBlocks CreateSiemensDataBlocks(IEnumerable<string> dataBlocks)
+        private SiemensDataTypes CreateSiemensDataBlocks(IEnumerable<string> dataBlocks)
         {
             // Create a new instance of SiemensDataBlocks
-            var siemensDataBlocks = new SiemensDataBlocks("prefix", "localname", "nsURI");
+            var siemensDataBlocks = new SiemensDataTypes("prefix", "localname", "nsURI");
 
             // Process each data block and add it to the SiemensDataBlocks
             foreach (var block in dataBlocks)
@@ -120,6 +206,18 @@ namespace Fls.AcesysConversion.PLC.Siemens.Components
             }
 
             return siemensDataBlocks;
+        }
+
+        // Method to update the AWL content
+        public void UpdateAwlContent(string awlContent)
+        {
+            LoadedAwlContent = awlContent;
+        }
+
+        // Method to update the SDF content
+        public void UpdateSdfContent(string sdfContent)
+        {
+            LoadedSdfContent = sdfContent;
         }
     }
 }

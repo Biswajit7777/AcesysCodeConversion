@@ -179,6 +179,8 @@ namespace Fls.AcesysConversion.UI.ViewModels
             }
         }
 
+        public SiemensProject SiemensProject { get; set; }
+
         public MainWindowViewModel()
         {
             IsDirty = false;
@@ -216,14 +218,25 @@ namespace Fls.AcesysConversion.UI.ViewModels
             try
             {
                 BeforeUpgradeSetup();
-                awlDocumentReplaced = await Task.Run(() => UpgradeFileS7(progress));
+
+                // Use project instead of awlDocumentReplaced
+                SiemensProject = await Task.Run(() => UpgradeFileS7(progress));
+
                 progress.Report("Upgrade Complete, Formatting File");
-                if (awlDocumentReplaced != null)
+
+                if (SiemensProject != null)
                 {
                     TargetWithoutIdAWLText += "\n\nUpgrading Completed. Loading Upgraded Content, Please Wait...";
-                    targetXmlText = sourceAWLText;
-                    TargetWithoutIdAWLText = await Task.Run(() => RemoveFlsIdAttributes(targetXmlText!, targetIdToLineMapping));
+
+                    // Assuming sourceAWLText is related to project content in some way
+                    targetXmlText = SiemensProject.ExtractAwlFile(); // Ensure ExtractAwlFile is available and returns the correct content
+
+                    if (!string.IsNullOrEmpty(targetXmlText))
+                    {
+                        TargetWithoutIdAWLText = await Task.Run(() => RemoveFlsIdAttributes(targetXmlText!, targetIdToLineMapping));
+                    }
                 }
+
                 AfterUpgradeSetup();
             }
             catch (Exception ex)
@@ -399,26 +412,17 @@ namespace Fls.AcesysConversion.UI.ViewModels
 
                     foreach (var file in filesToSave)
                     {
-                        // Ensure the file exists in the App.Data folder before attempting to save
+                        
                         if (File.Exists(file.Value))
                         {
-                            // Read the content of the file from the App.Data folder
-                            string content = File.ReadAllText(file.Value);
-
-                            // Generate a new file name based on your logic if needed
+                            string content = File.ReadAllText(file.Value);                            
                             string newFileName = GetNewFileNameBasedOnSomeLogic(file.Key);
-                            string savePath = Path.Combine(selectedPath, newFileName);
-
-                            // Save the file to the selected location
-                            await FileService.SaveXmlFileAsync(savePath, content);
-
-                            // Optionally provide user feedback
-                            // ShowInfoMessage($"File '{newFileName}' saved successfully at {selectedPath}");
+                            string savePath = Path.Combine(selectedPath, newFileName);                           
+                            await FileService.SaveXmlFileAsync(savePath, content);                            
                         }
                         else
                         {
-                            // Optionally handle the case where the file doesn't exist in App.Data
-                            // ShowErrorMessage(msgBoxService, new FileNotFoundException($"File '{file.Key}' not found in {appDataPath}"));
+                            
                         }
                     }
                 }
@@ -925,18 +929,26 @@ namespace Fls.AcesysConversion.UI.ViewModels
             SiemensProject project = new();
             project.Attach(messagesBroker);
 
-            if (SourceWithoutIdXmlText != null)
+            // Ensure both AWL and SDF content exist before proceeding
+            if (!string.IsNullOrEmpty(SourceWithoutIdXmlText) && !string.IsNullOrEmpty(sourceSDFText))
             {
-                progress.Report("Loading AWL and ");
-                await Task.Run(() => project.LoadAwlFile(SourceWithoutIdXmlText));
+                progress.Report("Loading AWL and SDF Files");
+
+                // Load AWL and SDF files concurrently
+                await Task.WhenAll(
+                    Task.Run(() => project.LoadAwlFile(SourceWithoutIdXmlText)),
+                    Task.Run(() => project.LoadSdfFile(sourceSDFText))
+                );
             }
             else
             {
+                // Return early if the necessary content is missing
                 return project;
             }
-           
+
             if (project != null)
             {
+                // Create upgrade options
                 SiemensUpgradeOptions options = new()
                 {
                     FromVersion = AcesysVersions.V77,
@@ -948,7 +960,9 @@ namespace Fls.AcesysConversion.UI.ViewModels
                     ECSFilePaths = ECSFilePaths
                 };
 
-                await Task.Run(() => project.UpgradeVersion(sourceAWLText, options, progress));
+                // Perform the upgrade using both files
+                progress.Report("Upgrading project version");
+                await Task.Run(() => project.UpgradeVersion(project, options, progress));
             }
 
             return project!;

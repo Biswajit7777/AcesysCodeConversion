@@ -20,13 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Siemens\Components\FunctionBlocks_FB\" />
     <Folder Include="Siemens\Components\SystemFunctions_FC\" />
     <Folder Include="Siemens\Components\OrganizationBlocks_OB\" />
     <Folder Include="Siemens\Components\ProjectFunctions_FC\" />
     <Folder Include="Siemens\Components\ProjectDataBlocks_DB\" />
     <Folder Include="Siemens\Components\SystemFunctions_SFC\" />
-    <Folder Include="Siemens\Components\SystemFunctionBlocks\" />
     <Folder Include="Siemens\Components\StandardDataBlocks_DB\" />
   </ItemGroup>
 

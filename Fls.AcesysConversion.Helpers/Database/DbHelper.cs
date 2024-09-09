@@ -34,6 +34,9 @@ public partial class DbHelper
     private readonly DataTable dtAnalogScanCounter = new("Analog_Scan_Counter");
     private readonly DataTable dtInterlock = new("Interlock");
     private readonly DataTable dtPointType = new("Point_Type");
+    private readonly DataTable dtUDTSiemens = new("UDT_Siemens");
+    private readonly DataTable dtFBSiemens = new("FB_Siemens");
+    private readonly DataTable dtSFBSiemens = new("SFB_Siemens");
     private readonly Dictionary<string, DbHelper> dbHelperCache = new();
     private static int outerIndex = 0;
     private static int innerIndex = 0;
@@ -148,6 +151,13 @@ public partial class DbHelper
 
             string sqlPointType = $@"SELECT Point_Type_V7,Type,Point_Type_V8,Remove,Append,Append_Data,Format,Format_Data,Language_Data                                   
                                    FROM ECS_Points";
+            string sqlUDTSiemens = $@"SELECT From_V77_Number,From_V77_Name,To_V80_Number,To_V80_Name                                  
+                                   FROM UDT_Siemens";
+            string sqlFBSiemens = $@"SELECT V77_Number,V77_Name,V77_FC_DBIndex,V80_Number,V80_Name,V80_FC_DBIndex                                  
+                                   FROM FB_Siemens";
+
+            string sqlSFBSiemens = $@"SELECT V77_Number,V77_Name,V80_Number,V80_Name                                  
+                                   FROM SFB_Siemens";
 
             using SqliteConnection conn = new(connectionString);
             using SqliteCommand cmd = conn.CreateCommand();
@@ -204,6 +214,18 @@ public partial class DbHelper
             cmd.CommandText = sqlPointType;
             using SqliteDataReader readerPointType = cmd.ExecuteReader();
             dbHelper.dtPointType.Load(readerPointType);
+
+            cmd.CommandText = sqlUDTSiemens;
+            using SqliteDataReader readerUDTSiemens = cmd.ExecuteReader();
+            dbHelper.dtUDTSiemens.Load(readerUDTSiemens);
+
+            cmd.CommandText = sqlFBSiemens;
+            using SqliteDataReader readerFBSiemens = cmd.ExecuteReader();
+            dbHelper.dtFBSiemens.Load(readerFBSiemens);
+
+            cmd.CommandText = sqlSFBSiemens;
+            using SqliteDataReader readerSFBSiemens = cmd.ExecuteReader();
+            dbHelper.dtSFBSiemens.Load(readerSFBSiemens);
 
             instance.dbHelperCache.Add(key, dbHelper);
             return instance.dbHelperCache[key];
@@ -4062,6 +4084,66 @@ public partial class DbHelper
         }
 
         return processedText;
+    }
+
+    public List<string> DataTypeListToBeDeleted()
+    {        
+        List<string> blockList = new List<string>();
+        
+        if (dtUDTSiemens != null)
+        {           
+            foreach (DataRow row in dtUDTSiemens.Rows)
+            {                
+                string fromV77Name = row["From_V77_Name"]?.ToString();
+                
+                if (!string.IsNullOrEmpty(fromV77Name))
+                {
+                    blockList.Add(fromV77Name);
+                }
+            }
+        }
+        
+        return blockList;
+    }
+
+    public List<string> FunctionalBlockListToBeDeleted()
+    {
+        List<string> blockList = new List<string>();
+
+        if (dtFBSiemens != null)
+        {
+            foreach (DataRow row in dtFBSiemens.Rows)
+            {
+                string fromV77Name = row["V77_Name"]?.ToString();
+
+                if (!string.IsNullOrEmpty(fromV77Name))
+                {
+                    blockList.Add(fromV77Name);
+                }
+            }
+        }
+
+        return blockList;
+    }
+
+    public List<string> SFBListToBeDeleted()
+    {
+        List<string> blockList = new List<string>();
+
+        if (dtSFBSiemens != null)
+        {
+            foreach (DataRow row in dtSFBSiemens.Rows)
+            {
+                string fromV77Name = row["V77_Name"]?.ToString();
+
+                if (!string.IsNullOrEmpty(fromV77Name))
+                {
+                    blockList.Add(fromV77Name);
+                }
+            }
+        }
+
+        return blockList;
     }
 }
 

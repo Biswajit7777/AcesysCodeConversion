@@ -35,12 +35,9 @@ namespace Fls.AcesysConversion.PLC.Siemens.Components
             Logger = LogHelper.Instance.Logger;
         }
 
-        public virtual void UpgradeVersion(string awlContent, SiemensUpgradeOptions upgradeOptions, IProgress<string> progress)
+        public virtual void UpgradeVersion(SiemensProject project, SiemensUpgradeOptions upgradeOptions, IProgress<string> progress)
         {
-            // Implement the logic to upgrade the AWL file based on the versioning needs
-            LogMessage("Upgrading Siemens AWL content to the new version.", Serilog.Events.LogEventLevel.Information);
-            progress?.Report("Upgrading AWL file...");
-            // Actual upgrade logic here
+            return;
         }
 
         public virtual void ParseAwlContent()
